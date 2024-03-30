@@ -1,12 +1,24 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 function App() {
-  const [id, selectedId] = useState(1);
+  let [count, setCount] = useState(0);
+  let [inputValue, setInput] = useState(1);
   
+  // useMemo() example here 
+  let finalCount = useMemo(()=>{
+    console.log("Memo got called")
+    let val = 0;
+    for(let i = 1; i <= inputValue; i++){
+      val += i;
+    }
+    return val;
+  }, [inputValue]);
+  
+ 
   return (
-    <>
-      <button onClick={()=>{
+    <div>
+      {/* <button onClick={()=>{
         selectedId(1)
       }}>1</button>
       <button onClick={()=>{
@@ -19,8 +31,20 @@ function App() {
         selectedId(4)
       }}>4</button>
 
-      <Todo id={id} />
-    </>
+      <Todo id={id} /> */}
+
+      {/* useMemeo examples */}
+
+      <input type="text" onChange={function(e){
+        let number = e.target.value;
+        setInput(number);
+      }} />
+      <p>{`Sum from 1 to ${inputValue} is ${finalCount}`}</p>
+      <button onClick={()=>{
+        setCount(count + 1)
+        
+      }}>{`Counter (${count})`}</button>
+    </div>
   )
 }
 
