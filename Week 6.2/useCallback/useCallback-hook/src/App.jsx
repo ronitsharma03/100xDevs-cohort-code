@@ -22,6 +22,7 @@ function App() {
   // Use your custom hook here 
   const todos = useTodos();
 
+  // And here we can map to the todos received and render them accordingly!
 return (
   <>
     {todos}
