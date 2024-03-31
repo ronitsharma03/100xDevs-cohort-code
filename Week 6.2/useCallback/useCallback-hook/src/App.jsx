@@ -1,8 +1,36 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
+import axios from 'axios';
 import './App.css'
 
+
+//Example of custom hooks in react
+
+function useTodos(){
+  // State variables can't be defined in any native function
+  // It should be kind of component or hook that let you define the state variables inside them
+  const [todos, setTodos] = useState([]);
+
+  useEffect(()=>{
+    axios.get("")
+    .then(function(res){
+      setTodos(res.data.todos);
+    })
+  })
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  // Use your custom hook here 
+  const todos = useTodos();
+
+return (
+  <>
+    {todos}
+  </>
+)
+
+
+
+  // const [count, setCount] = useState(0)
 
   //Here when the variable is a number and it's rerender can be stopped by using simple memo()
   //But if it is a object or function then memo() cant be used to stop its rerenders because though the value is same but the reference is not the same
@@ -14,19 +42,21 @@ function App() {
   //   console.log("a reneder")
   // }
 
-  const a = useCallback(function(){
-    console.log("Re-render");
-  }, []);
+  // const a = useCallback(function(){
+  //   console.log("Re-render 1");
+  // }, []);
   //It also takes a dependency array that tels it when to compute the function again!
 
-  return (
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <Demo a={a}/>
-      </div>
-  )
+  // return (
+  //     <div className="card">
+  //       <button onClick={() => setCount((count) => count + 1)}>
+  //         count is {count}
+  //       </button>
+  //       <Demo a={a}/>
+  //     </div>
+  // )
+
+
 }
 
 const Demo = memo(function({a}){
