@@ -5,29 +5,30 @@ import './App.css'
 
 //Example of custom hooks in react
 
-function useTodos(){
+function useTodos() {
   // State variables can't be defined in any native function
   // It should be kind of component or hook that let you define the state variables inside them
   const [todos, setTodos] = useState([]);
 
-  useEffect(()=>{
-    axios.get("")
-    .then(function(res){
-      setTodos(res.data.todos);
-    })
+  useEffect(() => {
+    axios.get("https://sum-server.100xdevs.com/todos")
+      .then(function (res) {
+        setTodos(res.data.todos);
+      })
   })
 }
 
 function App() {
   // Use your custom hook here 
   const todos = useTodos();
+  
 
   // And here we can map to the todos received and render them accordingly!
-return (
-  <>
-    {todos}
-  </>
-)
+  return (
+    <>
+      {todos}
+    </>
+  )
 
 
 
@@ -60,7 +61,7 @@ return (
 
 }
 
-const Demo = memo(function({a}){
+const Demo = memo(function ({ a }) {
   console.log("Demo rerenders");
   return <div>
     h1 there {a}
