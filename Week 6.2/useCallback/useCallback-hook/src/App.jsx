@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 import './App.css'
 
@@ -21,11 +21,18 @@ function useTodos() {
 function App() {
   // Use your custom hook here 
   const todos = useTodos();
-  
+  const divRef = useRef();
+  const income = 20000;
 
+  useEffect(()=>{
+    setTimeout(()=>{
+      divRef.current.innerHTML = 5000;
+    }, 3000);
+  }, []); 
   // And here we can map to the todos received and render them accordingly!
   return (
     <>
+      <div ref={divRef}>{income}</div>
       {todos}
     </>
   )
