@@ -13,6 +13,7 @@ export const evenSelector = selector({
         // for simplicity or we can do something like get: (props)=>{
             // const count = props.get(countAtom);
         // }
+        // Selectors can depend on any atom and also other selectors
        const count = get(countAtom); // evenSelector depends on count so we have to do get(<State dependant varioable>)
        // Same as the dependancy array in useMemo, useCallback, useEffect
        return count % 2;
