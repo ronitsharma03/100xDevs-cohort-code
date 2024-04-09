@@ -60,11 +60,13 @@ html{
     background-color: #303030;
     color: #fff;
     border-radius: 10px;
+    border: 1px solid black;
 }
 .btn:hover{
-    background: #fff;
-    color: #030303;
+    background: #030303;
+    color: #fff;
     transition: 0.1s ease;
+    border: 1px solid black;
 }
 
 .filter-div{
