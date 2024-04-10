@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 
+ // Atoms for todolist, todoinput and todofilter states
 export const todoListAtom = atom({
     key: "todoTitleAtom",
     default: []
