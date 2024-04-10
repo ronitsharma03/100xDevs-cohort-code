@@ -1,4 +1,4 @@
-import { Suspense, lazy, memo } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 // import { Dashboard } from './components/Dashboard'
 const Landing = lazy(() => import('./components/Landing'));
@@ -11,8 +11,9 @@ function App() {
       <BrowserRouter>
         <Appbar />
         <Routes>
-          <Route path="/dashboard" element={<Suspense fallback="Loading..."><Dashbaord /></Suspense>} />
-          <Route path="/" element={<Suspense fallback="Loading..."><Landing /></Suspense>} />
+          {/*Suspense API*/}
+          <Route path="/dashboard" element={<Suspense fallback={"Loading..."}><Dashbaord /></Suspense>} />
+          <Route path="/" element={<Suspense fallback={"Loading..."}><Landing /></Suspense>} />
         </Routes>
       </BrowserRouter>
     </>
