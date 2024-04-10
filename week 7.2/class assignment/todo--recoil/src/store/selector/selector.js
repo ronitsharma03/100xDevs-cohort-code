@@ -2,6 +2,8 @@ import { selector } from "recoil";
 import { filterAtom, todoListAtom } from "../atom/atoms";
 
 
+// Selector for the filter todos as the filtered todos will
+// depend on the todos and filter
 export const filteredTodoListSelector = selector({
     key: "filteredTodoListSelector",
     get: ({ get }) => {
