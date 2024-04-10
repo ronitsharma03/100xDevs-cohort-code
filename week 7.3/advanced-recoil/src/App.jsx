@@ -1,5 +1,5 @@
 // Advanced recoil //
-import { useRecoilValue, RecoilRoot } from 'recoil'
+import { useRecoilValue, RecoilRoot, useRecoilState } from 'recoil'
 import { jobsAtom, messagesAtom, networkAtom, notificationAtom } from './atoms'
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
 function Buttons(){
   const network = useRecoilValue(networkAtom);
-  const messages = useRecoilValue(messagesAtom);
+  const [messages, setMessagesCount] = useRecoilState(messagesAtom);
   const notifications = useRecoilValue(notificationAtom);
   const jobs = useRecoilValue(jobsAtom);
 
@@ -23,7 +23,9 @@ function Buttons(){
       <button>Jobs ({jobs})</button>
       <button>Notification ({notifications})</button>
       <button>Messaging({messages})</button>
-      <button>Me</button>
+      <button onClick={()=>{
+        setMessagesCount(c => c + 1)
+      }}>Me</button>
     </>
   )
 }
