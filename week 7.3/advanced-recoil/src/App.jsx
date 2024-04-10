@@ -1,5 +1,5 @@
 // Advanced recoil //
-import { useRecoilValue, RecoilRoot, useRecoilState } from 'recoil'
+import { useRecoilValue, RecoilRoot, useRecoilState, selector } from 'recoil'
 import { jobsAtom, messagesAtom, networkAtom, notificationAtom } from './atoms'
 import { meSelector } from './selector';
 import { useMemo } from 'react';
@@ -25,6 +25,7 @@ function Buttons(){
     return network + notifications + jobs + messages;
   }, [network, notifications, messages, jobs]); // Still an ugly way to do 
 
+  const totalNotifications = useRecoilValue(meSelector);
   return (
     <>
       <button>Home</button>
@@ -34,7 +35,7 @@ function Buttons(){
       <button>Messaging({messages})</button>
       <button onClick={()=>{
         setMessagesCount(c => c + 1)
-      }}>Me ({totalvalues})</button>
+      }}>Me ({totalNotifications})</button>
     </>
   )
 }
