@@ -1,6 +1,8 @@
 // Advanced recoil //
 import { useRecoilValue, RecoilRoot, useRecoilState } from 'recoil'
 import { jobsAtom, messagesAtom, networkAtom, notificationAtom } from './atoms'
+import { meSelector } from './selector';
+import { useMemo } from 'react';
 
 function App() {
   return (
@@ -16,6 +18,13 @@ function Buttons(){
   const notifications = useRecoilValue(notificationAtom);
   const jobs = useRecoilValue(jobsAtom);
 
+  // Ugly approach to do the all sum
+  // Still you need to use useMemo() hook to make sure this won't be calculated since any of the recoil value changes
+
+  const totalvalues = useMemo(() => {
+    return network + notifications + jobs + messages;
+  }, [network, notifications, messages, jobs]); // Still an ugly way to do 
+
   return (
     <>
       <button>Home</button>
@@ -25,7 +34,7 @@ function Buttons(){
       <button>Messaging({messages})</button>
       <button onClick={()=>{
         setMessagesCount(c => c + 1)
-      }}>Me</button>
+      }}>Me ({totalvalues})</button>
     </>
   )
 }
