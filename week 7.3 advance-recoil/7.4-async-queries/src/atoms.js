@@ -8,7 +8,7 @@ export const notifications = atom({
         get: async () => {
             // await new Promise(a => setTimeout(()=>{
             //     return a;
-            // }, 5000));
+            // }, 5000)); // fake delay -> can be slightly modified to use a loader
           const res = await axios.get("https://sum-server.100xdevs.com/notifications") 
           return res.data;
         }

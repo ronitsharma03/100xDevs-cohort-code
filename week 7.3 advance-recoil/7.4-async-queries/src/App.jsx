@@ -1,12 +1,14 @@
-
+import React, { Suspense } from 'react'
 import './App.css'
-import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { RecoilRoot, useRecoilValue } from 'recoil'
 import { notifications, totalNotificationSelector } from './atoms'
 
 
 function App() {
   return <RecoilRoot>
-    <MainApp />
+    <Suspense fallback="Loading....">
+      <MainApp />
+    </Suspense>
   </RecoilRoot>
 }
 
