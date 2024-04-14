@@ -7,7 +7,7 @@ export const RevenueCard = ({
 }) => {
     return (
             <div className="bg-white shadow-md border rounded-lg overflow-hidden">
-                <div className="p-5 bg-steelblue-500 text-white">
+                <div className="p-4 bg-steelblue-500 text-white py-8">
                     <div className="text-white text-sm flex justify-start ">
                         {title}
                         <div className="ml-1 flex items-center">

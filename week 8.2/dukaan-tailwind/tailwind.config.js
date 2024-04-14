@@ -15,6 +15,9 @@ export default {
         },
         steelblue: {
           500: "#146eb4"
+        },
+        snow: {
+          500: "#fafafa"
         }
       }
     },
