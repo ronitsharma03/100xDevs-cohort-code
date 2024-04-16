@@ -4,11 +4,11 @@ import { Title } from "../components/Title"
 
 export const Cards = () => {
     return (
-        <div className="grid gap-5 bg-snow-500">
+        <div className="grid gap-y-7 bg-snow-500">
             <div className="px-7">
                 <Title />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-11 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pl-11 pr-6">
                 {
                     DATA.map((item, index) => {
                         return (

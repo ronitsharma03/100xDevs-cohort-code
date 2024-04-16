@@ -2,7 +2,7 @@ import { Searchbar } from "./Searchbar"
 
 export const Appbar = () => {
     return (
-        <div className="bg-white grid grid-cols-3 pt-2 items-center gap-5 px-11 pb-3 border border-slate-300">
+        <div className="bg-white grid grid-cols-3 pt-2 items-center gap-5 pl-11 pr-7 pb-3 border border-slate-300">
             <div className="flex gap-4 col-span-1"> 
                 <div className="font-medium text-xl">
                     Payouts

@@ -18,6 +18,10 @@ export default {
         },
         snow: {
           500: "#fafafa"
+        },
+        black: {
+          200: "#E5E5E5",
+          300: "#696969"
         }
       }
     },
