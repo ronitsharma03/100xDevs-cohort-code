@@ -18,3 +18,9 @@ export const DATA = [
         nextDate: false
     },
 ];
+
+export const tableData = [
+    {
+        
+    }
+]
