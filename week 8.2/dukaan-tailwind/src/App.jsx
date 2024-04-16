@@ -7,7 +7,7 @@ function App() {
     <div>
       <Appbar />
       <Cards />
-      <Table />
+      <Table status="successfull"/>
     </div>
   )
 }

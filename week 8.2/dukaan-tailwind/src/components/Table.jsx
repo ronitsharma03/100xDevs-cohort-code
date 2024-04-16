@@ -1,6 +1,15 @@
 import { Searchbar } from "./Searchbar"
+import { tableData } from "../assets/data"
 
-export const Table = () => {
+export const Table = (
+    {
+        orderId,
+        TxnStatus,
+        txnId,
+        refundDate,
+        orderAmt
+    }
+) => {
     return (
         <div className="grid gap-6">
             <div className="flex flex-col gap-6">
@@ -45,17 +54,27 @@ export const Table = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="bg-white border-b">
-                                <th scope="row" className="px-6 py-4 font-medium text-blue-700 whitespace-nowrap">#281209</th>
-                                <td className="px-6 py-4 flex items-center gap-2 text-black-600">
-                                    <div className="h-2.5 w-2.5 rounded-full bg-green-500">
-                                    </div>
-                                    Successful
-                                </td>
-                                <td className="px-6 py-4 text-black-400">131634495747</td>
-                                <td className="px-6 py-4 text-black-400">Today, 08:45 PM</td>
-                                <td className="px-6 py-4 text-right text-black-600">₹1,125.00</td>
-                            </tr>
+                            {
+                                tableData.map((item, index) => {
+                                    return (
+                                        <tr key={index} className="bg-white border-b">
+                                            <th scope="row" className="px-6 py-4 font-medium text-blue-700 whitespace-nowrap">{item.orderId}</th>
+                                            <td className="px-6 py-4 flex items-center gap-2 text-black-600">
+                                                {
+                                                    item.TxnStatus == "successfull" ? <div className="h-2.5 w-2.5 rounded-full bg-green-500">
+                                                    </div> : item.TxnStatus == "pending" ? <div className="h-2.5 w-2.5 rounded-full bg-yellow-500">
+                                                    </div> : <div className="h-2.5 w-2.5 rounded-full bg-red-500">
+                                                    </div>
+                                                }
+                                                {item.TxnStatus}
+                                            </td>
+                                            <td className="px-6 py-4 text-black-400">{item.txnId}</td>
+                                            <td className="px-6 py-4 text-black-400">{item.refundDate}</td>
+                                            <td className="px-6 py-4 text-right text-black-600">{item.orderAmt}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
                         </tbody>
                     </table>
                 </div>
