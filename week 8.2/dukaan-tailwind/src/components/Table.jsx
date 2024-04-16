@@ -12,16 +12,16 @@ export const Table = (
 ) => {
     return (
         <div className="grid gap-6">
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 bg-snow-500 pb-10 pl-11 pt-8">
                 <div>
                     <p className="text-xl font-medium">Transactions | This Month</p>
                 </div>
                 <div className="flex gap-3 text-sm">
                     <span className="bg-black-200 rounded-2xl text-black-300 py-1.5 px-4">Payouts (22)</span>
-                    <span className="bg-blue-700 rounded-2xl text-white-500 py-1.5 px-4">Refunds (6)</span>
+                    <span className="bg-blue-700 rounded-2xl text-white py-1.5 px-4">Refunds (6)</span>
                 </div>
             </div>
-            <div className="bg-white-500 px-3 pt-3 pb-2 rounded-lg grid gap-4">
+            <div className="bg-white-500 px-3 pb-2 rounded-lg grid gap-4 pl-11">
                 <div className="flex justify-between items-center">
                     <div className="w-96 h-10 rounded flex items-center border border-black-150">
                         <Searchbar />
@@ -43,7 +43,7 @@ export const Table = (
                     </div>
                 </div>
                 <div className="relative overflow-x-auto">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                    <table className="w-full text-[95%] text-left rtl:text-right text-gray-500">
                         <thead className="text-xm font-medium rounded uppercase text-black-400">
                             <tr>
                                 <th scope="col" className="px-6 py-3 font-medium">order ID</th>
@@ -59,7 +59,7 @@ export const Table = (
                                     return (
                                         <tr key={index} className="bg-white border-b">
                                             <th scope="row" className="px-6 py-4 font-medium text-blue-700 whitespace-nowrap">{item.orderId}</th>
-                                            <td className="px-6 py-4 flex items-center gap-2 text-black-600">
+                                            <td className="px-6 py-4 flex items-center gap-2 text-zinc-700">
                                                 {
                                                     item.TxnStatus == "successfull" ? <div className="h-2.5 w-2.5 rounded-full bg-green-500">
                                                     </div> : item.TxnStatus == "pending" ? <div className="h-2.5 w-2.5 rounded-full bg-yellow-500">
@@ -70,7 +70,7 @@ export const Table = (
                                             </td>
                                             <td className="px-6 py-4 text-black-400">{item.txnId}</td>
                                             <td className="px-6 py-4 text-black-400">{item.refundDate}</td>
-                                            <td className="px-6 py-4 text-right text-black-600">{item.orderAmt}</td>
+                                            <td className="px-6 py-4 text-right text-zinc-700">{item.orderAmt}</td>
                                         </tr>
                                     )
                                 })
