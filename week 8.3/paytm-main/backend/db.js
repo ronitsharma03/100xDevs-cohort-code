@@ -6,7 +6,7 @@ const { required } = require("nodemon/lib/config");
 try {
     mongoose.connect("mongodb+srv://devxronit:C32LC0cQuWkzm8mV@cluster1-paytm.w69dpt0.mongodb.net/Paytm");
 }
-catch(e){
+catch (e) {
     console.log("Cannot connect to database Error: " + e);
 }
 
