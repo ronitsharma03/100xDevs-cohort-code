@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
+
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(cors()); // To allow request to this backend from a frontend since backend and frontend are going to be deployed
