@@ -2,21 +2,13 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-    res.send("Hello home page");
-});
+const mainRouter = require("./router/index");
 
-app.get("/signin", (req, res) => {
-    res.send("Hello signin page")
-});
+// All the requests that got to api/v1 will go to mainRouter that is in router/index.js
+app.use("/api/v1", mainRouter);
 
-app.get("/signup", (req, res) => {
-    res.send("Hello signup page");
-});
 
-app.get("/updateProfile", (req, res) => {
-    res.send("Hello update profile page");
-});
+
 
 
 app.listen(port, () => {
