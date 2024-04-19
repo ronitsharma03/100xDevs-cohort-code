@@ -80,26 +80,40 @@ router.post("/signin", async (req, res) => {
         });
     }
 
-    const user = await User.findOne({
-        username: req.body.username,
-        password: req.body.password
-    });
-    // console.log(user);
+    try {
+        const user = await User.findOne({
+            username: req.body.username
+        });
+        console.log(user);
 
-    if (!user) {
-        return res.status(411).json({
-            message: "Error while logging in"
+        if (!user) {
+            return res.status(411).json({
+                message: "Error while logging in: User not found"
+            });
+        }
+       
+        const isPassword = await bcrypt.compare(req.body.password, user.password);
+        if(!isPassword){
+            return res.status(411).json({
+                message:"Error while logging in: Incorrect password"
+            });
+        }
+
+        const token = jwt.sign({
+            userId: user._id
+        }, JWT_SECRET);
+
+        res.status(200).json({
+            message: "Signin successfull",
+            token: token
         });
     }
-
-    const token = jwt.sign({
-        userId: user._id
-    }, JWT_SECRET);
-
-    res.status(200).json({
-        message: "Signin successfull",
-        token: token
-    });
+    catch (error) {
+        console.log("Error while signing in ", error);
+        return res.status(500).json({
+            message: "Intrnal server error"
+        })
+    }
 })
 
 module.exports = router;
