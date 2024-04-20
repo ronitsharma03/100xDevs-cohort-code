@@ -4,6 +4,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { User } = require("../db");
 const { JWT_SECRET } = require("../config");
+const { authMiddleware } = require("../middleware");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -89,11 +90,11 @@ router.post("/signin", async (req, res) => {
                 message: "Error while logging in: User not found"
             });
         }
-       
+
         const isPassword = await bcrypt.compare(req.body.password, user.password);
-        if(!isPassword){
+        if (!isPassword) {
             return res.status(411).json({
-                message:"Error while logging in: Incorrect password"
+                message: "Error while logging in: Incorrect password"
             });
         }
 
@@ -113,5 +114,65 @@ router.post("/signin", async (req, res) => {
         })
     }
 })
+
+// Update profile route
+const updateBody = zod.object({
+    password: zod.string().min(6),
+    firstName: zod.string().min(3),
+    lastName: zod.string().min(3)
+});
+router.put('/profile', authMiddleware, async (req, res) => {
+    const { success } = updateBody.safeParse(req.body);
+
+    if (!success) {
+        return res.status(411).json({
+            message: "Failed to update"
+        });
+    }
+    try {
+        await User.updateOne({ userId: req.userId }, req.body);
+    }
+    catch (error) {
+        return res.status(411).json({
+            message: "Internal server error"
+        })
+    }
+
+    return res.json({
+        message: "Updated successfully!"
+    });
+});
+
+// Route to get the searched users
+router.get('/bulk', async (req, res) => {
+    const filter = req.query.filter || "";
+
+    const users = await User.find({
+        $or: [
+            {
+                firstName: {
+                    "$regex": filter
+                }
+            },
+            {
+                lastName: {
+                    "$regex": filter
+                }
+            }
+        ]
+    })
+
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    });
+})
+
+
+
 
 module.exports = router;
