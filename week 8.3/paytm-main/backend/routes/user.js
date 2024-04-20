@@ -19,7 +19,6 @@ const signupBody = zod.object({
 router.post("/signup", async (req, res) => {
     const { success } = signupBody.safeParse(req.body);
     if (!success) {
-        console.log("hello")
         return res.status(411).json({
             message: "Wrong inputs"
         });
@@ -84,7 +83,6 @@ router.post("/signin", async (req, res) => {
         const user = await User.findOne({
             username: req.body.username
         });
-        console.log(user);
 
         if (!user) {
             return res.status(411).json({
