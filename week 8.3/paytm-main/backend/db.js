@@ -1,10 +1,10 @@
+const dotenv = require('dotenv').config();
 const mongoose = require("mongoose");
-const { required } = require("nodemon/lib/config");
 
 
 // Error handeling if any error occured while connecting to the mongodb database
 try {
-    mongoose.connect("mongodb+srv://devxronit:C32LC0cQuWkzm8mV@cluster1-paytm.w69dpt0.mongodb.net/Paytm");
+    mongoose.connect(process.env.MONGODB_URL);
 }
 catch (e) {
     console.log("Cannot connect to database Error: " + e);
