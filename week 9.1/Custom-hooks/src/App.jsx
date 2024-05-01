@@ -10,13 +10,13 @@ function App() {
 
   useEffect(() => {
     setInterval(() => {
-      // setRender(r => !r);
-    }, 3000);
+      setRender(r => !r);
+    }, 5000);
   }, []);
 
   return (
     <>
-      {render ? <MyComponent /> : <div>Component 2</div>}
+      {render ? <MyComponent2 /> : <div>Component 2 unmounted</div>}
     </>
   )
 }
@@ -31,13 +31,14 @@ class MyComponent2 extends Component{
 
   // Function that runs when the component unmounts
   componentWillUnmount(){
-    console.log("Component unmounted!");
+    // Cleanup (e.g., Remove EventListeners or cancle subscriptions)
+    console.log("Component 2 unmounted!");
   }
 
   render() {
     return (
       <div>
-        Hi using class component!
+        Component 2 mounted
       </div>
     )
   }
