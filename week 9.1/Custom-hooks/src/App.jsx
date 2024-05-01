@@ -6,15 +6,26 @@ import axios from 'axios';
 // import viteLogo from '/vite.svg'
 import './App.css'
 
+// A custom interval hook that calls a callback fn after certain delay...
+function useInterval(callback, delay) {
+  useEffect(() => {
+    const intervalId = setInterval(callback, delay);
 
-function useIsOnline(){
+    return () => {
+      clearInterval(intervalId);
+    }
+  }, [callback, delay]);
+}
+
+
+function useIsOnline() {
   const [status, setStatus] = useState(window.navigator.onLine);
   useEffect(() => {
-    window.addEventListener("online", ()=>{
+    window.addEventListener("online", () => {
       setStatus(true);
     });
 
-    window.addEventListener("offline", ()=>{
+    window.addEventListener("offline", () => {
       setStatus(false);
     })
   })
@@ -38,8 +49,8 @@ function useTodo(n) {
         settodos(response.data.todos);
         setloading(false);
       })
- // This cleanup fn won't matter at all if the value of n is hardcoded then it won't changes and no need to stop the clock
- // Otherwise the clock of setInterval will run every time the n changes creating a number of other pending setInterval clocks
+    // This cleanup fn won't matter at all if the value of n is hardcoded then it won't changes and no need to stop the clock
+    // Otherwise the clock of setInterval will run every time the n changes creating a number of other pending setInterval clocks
     return () => {
       clearInterval(clockId);
     }
@@ -48,13 +59,22 @@ function useTodo(n) {
   return { todos, loading };
 }
 
+
 function App() {
   const { todos, loading } = useTodo(5);
   const isOnline = useIsOnline();
-  if(isOnline){
-    return "You are Online baby"
+  if (isOnline) {
+    const [count, setcount] = useState(0);
+    useInterval(() => {
+      setcount(c => c + 1);
+    }, 1000)
+
+    return <div>
+"You are Online baby" <br />
+      Seconds passed are: {count}
+    </div>
   }
-  else{
+  else {
     return "You are Offline baby"
   }
 
