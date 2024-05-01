@@ -9,29 +9,46 @@ import './App.css'
 
 
 // useTodo -> Custom Hook
-function useTodo() {
+function useTodo(n) {
   const [todos, settodos] = useState([]);
-  useEffect(() => {
-    axios.get("https://sum-server.100xdevs.com/todos")
-    .then(response => {
-      settodos(response.data.todos);
-    })
-  }, []);
+  const [loading, setloading] = useState(true);
 
-  return todos;
+  useEffect(() => {
+    const clockId = setInterval(() => {
+      axios.get("https://sum-server.100xdevs.com/todos")
+        .then(response => {
+          settodos(response.data.todos);
+          setloading(false);
+        })
+    }, n * 1000);
+    axios.get("https://sum-server.100xdevs.com/todos")
+      .then(response => {
+        settodos(response.data.todos);
+        setloading(false);
+      })
+ // This cleanup fn won't matter at all if the value of n is hardcoded then it won't changes and no need to stop the clock
+ // Otherwise the clock of setInterval will run every time the n changes creating a number of other pending setInterval clocks
+    return () => {
+      clearInterval(clockId);
+    }
+  }, [n]);
+
+  return { todos, loading };
 }
+
 function App() {
-  const todos = useTodo();
+  const { todos, loading } = useTodo(5);
+
   return (
     <>
       {
-        todos.map((todo, index) => <Track key={index} title={todo.title} description={todo.description}/>)
+        loading ? <div>Loading...</div> : todos.map((todo, index) => <Track key={index} title={todo.title} description={todo.description} />)
       }
     </>
   )
 }
 
-function Track({title, description}){
+function Track({ title, description }) {
   return (
     <div>
       <h1>{title}</h1>
@@ -63,7 +80,7 @@ function Track({title, description}){
 //   )
 // }
 // class MyComponent2 extends Component{
-  
+
 //   // Inbuilt functions in class components
 
 //   // Function that runs when the component mounts
