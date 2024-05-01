@@ -7,7 +7,19 @@ import axios from 'axios';
 import './App.css'
 
 
+function useIsOnline(){
+  const [status, setStatus] = useState(window.navigator.onLine);
+  useEffect(() => {
+    window.addEventListener("online", ()=>{
+      setStatus(true);
+    });
 
+    window.addEventListener("offline", ()=>{
+      setStatus(false);
+    })
+  })
+  return status;
+}
 // useTodo -> Custom Hook
 function useTodo(n) {
   const [todos, settodos] = useState([]);
@@ -38,6 +50,13 @@ function useTodo(n) {
 
 function App() {
   const { todos, loading } = useTodo(5);
+  const isOnline = useIsOnline();
+  if(isOnline){
+    return "You are Online baby"
+  }
+  else{
+    return "You are Offline baby"
+  }
 
   return (
     <>
