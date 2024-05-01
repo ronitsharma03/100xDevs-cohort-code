@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM class</title>
+    <!-- <style>
+        .container{
+            background-color: red;
+            font-size: 50px;
+            margin: 20px;
+            padding: 10px;
+        }
+    </style> -->
+</head>
+<body>
+    <!-- <div class="container">
+        hi there
+    </div>
+    <div class="container">
+        hi there 2
+    </div> -->
+    <input oninput="debouncedCalSum()" id="first" type="text" placeholder="Principal" value=""><br> <br>
+    <input oninput="debouncedCalSum()" id="second" type="text" placeholder="Rate" value=""><br> <br>
+    <input oninput="debouncedCalSum()" type="text" placeholder="Time" id="time"><br> <br>
+    <!-- <button onclick="calculateSum()">Calculate</button> <br> <br> -->
+    <div id="sum"></div>
+    
+</body>
+<script>
+    let timeout;
+    function debouncedCalSum(){
+        //debounced version
+        //clear the timeout whenever the input changes in under 1000ms if not send the request
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            calculateSum()
+        }, 1000);
+    }
+    async function calculateSum(){
+        let firstNum = document.getElementById('first').value;
+        let secondNum = document.getElementById('second').value;
+        let time = document.getElementById('time').value;
+        // let ans = document.getElementById('sum');
+        // ans.innerHTML = parseInt(firstNum) + parseInt( secondNum);
+    //    fetch("http://localhost:3000/sum?a="+firstNum+"&b="+secondNum)
+    //    .then(function(res){
+    //     // console.log(res);
+    //     res.text()
+    //         .then(function(ans){
+    //             document.getElementById('sum').innerHTML = `Sum is ${ans}`;
+    //         })
+    //    })
+    const response = await fetch("https://sum-server.100xdevs.com/interest?principal="+firstNum+"&rate="+secondNum+"&time="+time);
+    const answer = await response.json();
+    document.getElementById('sum').innerHTML = `Total is ${answer.total} & Interest is ${answer.interest}`;
+    }
+
+</script>
+</html>
