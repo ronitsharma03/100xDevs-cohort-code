@@ -13,15 +13,15 @@ function greet(firstName: string) {
 // the return type would be number so it depends on you whether to specify the return type of the function or not, beacuse typescript
 // would automatically knows what type of value will be returned by the function
 // But in general it is a good practice tho to specify the return type of the functions at function parameters 
-function sum (a: number, b: number): number{
-    return a+b;
+function sum(a: number, b: number): number {
+    return a + b;
 }
 
 const value = sum(3, 4);
 console.log(value)
 
-function isLegal(age: number): boolean{
-    if(age >= 18){
+function isLegal(age: number): boolean {
+    if (age >= 18) {
         return true;
     }
     return false;
@@ -39,11 +39,11 @@ function isLegal(age: number): boolean{
 // }
 
 // Better approach -> callback function arguments are specified in the brackets....
-function callback(cb : ()=> void, delay: number){
+function callback(cb: () => void, delay: number) {
     setTimeout(cb, delay);
 }
 
-callback(()=>{
+callback(() => {
     console.log("Hello world after 2s");
 }, 2000);
 
@@ -62,15 +62,15 @@ interface User {
     email?: string; // ? means optional
 }
 
-function isLegal2(user: User){
-    if(user.age > 18){
+function isLegal2(user: User) {
+    if (user.age > 18) {
         return true;
     }
     return false;
 }
 
-function greet2(user: User){
-    console.log("Hi, "+user.firstName);
+function greet2(user: User) {
+    console.log("Hi, " + user.firstName);
 }
 
 greet2({
@@ -85,10 +85,10 @@ const isOk = isLegal2({
     age: 20
 });
 
-if(isOk){
+if (isOk) {
     console.log("You can vote")
 }
-else{
+else {
     console.log("You can't vote")
 }
 
@@ -102,16 +102,21 @@ interface Person {
 // While implementing class from a interface these should always be defines acc to their types
 // types are also similar as interface but there is a big difference btw them
 // the difference is interfaces lets you implement classes form them while types won't
-class Employee implements Person{
+class Employee implements Person {
     name: string;
     age: number;
 
-    constructor(name: string, a: number){
+    constructor(name: string, a: number) {
         this.name = name;
         this.age = a;
     }
 
-    greet (phrase: string): void{
+    greet(phrase: string): void {
         console.log(`${phrase} ${this.name}`);
     }
- }
+}
+
+const obj = new Employee("Ronit", 20);
+console.log(obj.greet("Hello "));
+
+
