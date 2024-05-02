@@ -92,3 +92,26 @@ else{
     console.log("You can't vote")
 }
 
+// Implementing class from interfaces
+interface Person {
+    name: string;
+    age: number;
+    greet(phrase: string): void;
+}
+
+// While implementing class from a interface these should always be defines acc to their types
+// types are also similar as interface but there is a big difference btw them
+// the difference is interfaces lets you implement classes form them while types won't
+class Employee implements Person{
+    name: string;
+    age: number;
+
+    constructor(name: string, a: number){
+        this.name = name;
+        this.age = a;
+    }
+
+    greet (phrase: string): void{
+        console.log(`${phrase} ${this.name}`);
+    }
+ }
