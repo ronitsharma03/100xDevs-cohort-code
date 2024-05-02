@@ -56,9 +56,10 @@ callback(()=>{
 // Interfaces in typescript
 
 interface User {
-    firstName: String,
-    lastName: String,
-    age: number
+    firstName: string;
+    lastName: string;
+    age: number;
+    email?: string; // ? means optional
 }
 
 function isLegal2(user: User){
