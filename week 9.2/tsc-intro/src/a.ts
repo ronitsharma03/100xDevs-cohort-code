@@ -51,3 +51,43 @@ callback(()=>{
 // Another better approach to initialize a typescript project 
 // All the ts files that needs to be compiled are stored in a src folder and output js files to be stoed in another folder call it
 // dist or build -> that has to be configured in the tsconfig.json file in rootDir and the outDir
+
+
+// Interfaces in typescript
+
+interface User {
+    firstName: String,
+    lastName: String,
+    age: number
+}
+
+function isLegal2(user: User){
+    if(user.age > 18){
+        return true;
+    }
+    return false;
+}
+
+function greet2(user: User){
+    console.log("Hi, "+user.firstName);
+}
+
+greet2({
+    firstName: "Ronit",
+    lastName: "Kahjuria",
+    age: 20
+});
+
+const isOk = isLegal2({
+    firstName: "Ronit",
+    lastName: "Khajuria",
+    age: 20
+});
+
+if(isOk){
+    console.log("You can vote")
+}
+else{
+    console.log("You can't vote")
+}
+
