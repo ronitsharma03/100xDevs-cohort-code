@@ -144,3 +144,29 @@ const t: newPerson = {
 // Exapmle of arrays in typescript
 const arr: number[] = [1, 2, 3, 4, 5];
 console.log(arr);
+
+
+// Enums -> Enumerations in TS
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
+}
+
+function doSomething(keypressed: Direction){
+    if(keypressed == Direction.Up){
+        console.log("Do this");
+    }
+    if(keypressed == Direction.Down){
+        console.log("..");
+    }
+    // otherwise .....
+}
+
+doSomething(Direction.Up);
+console.log(Direction.Up);
+console.log(Direction.Down);
+console.log(Direction.Left);
+console.log(Direction.Right);
