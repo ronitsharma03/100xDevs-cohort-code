@@ -117,6 +117,26 @@ class Employee implements Person {
 }
 
 const obj = new Employee("Ronit", 20);
-console.log(obj.greet("Hello "));
+console.log(obj.name +" "+ obj.age);
 
+type person1 = {
+    name: string;
+    age?: number;
+    department: string;
+}
+
+interface person2 {
+    startDate: Date;
+    endDate: Date;
+}
+
+// Intersection in type -> let u use the property of more than on interface and type or type and type or interface and interface
+type newPerson = person1 & person2;
+
+const t: newPerson = {
+    name: "Ronit",
+    department: "IT",
+    startDate: new Date(),
+    endDate: new Date()
+};
 
