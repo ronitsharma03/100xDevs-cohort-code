@@ -197,6 +197,7 @@ solution(21);
 // console.log(var1.toUpperCase()) This function can't be used as the type of arg is newType type as it don't implicitly specify if it is
 // string or number and TS is not a smart enough to infer the return type
 // So generics can be used to solve this problem
+// In generics the function type or input type is not specified during function declaration it is specified during the function call
 function identity2<T>(arg: T): T {
     return arg;
 }
