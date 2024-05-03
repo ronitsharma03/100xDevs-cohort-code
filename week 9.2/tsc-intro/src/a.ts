@@ -140,3 +140,7 @@ const t: newPerson = {
     endDate: new Date()
 };
 
+
+// Exapmle of arrays in typescript
+const arr: number[] = [1, 2, 3, 4, 5];
+console.log(arr);
