@@ -147,12 +147,14 @@ console.log(arr);
 
 
 // Enums -> Enumerations in TS
+// By default these will contain number value starting from 0 till the no. of things inside enums
+// Set manual values to them as below:
 
 enum Direction {
-    Up,
-    Down,
-    Left,
-    Right
+    Up = "Up",
+    Down = "Down",
+    Left = "Left",
+    Right = "Right"
 }
 
 function doSomething(keypressed: Direction){
