@@ -207,7 +207,7 @@ let output2 = identity2<number>(100);
 
 
 // Solution to original problem
-function getFirstElement<T>(arr: T[]) {
+function getFirstElement<T>(arr: T[]): T {
     return arr[0];
 }
 
