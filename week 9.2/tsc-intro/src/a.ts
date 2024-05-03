@@ -204,3 +204,12 @@ function identity2<T>(arg: T): T {
 
 let output1 = identity2<string>("myString");
 let output2 = identity2<number>(100);
+
+
+// Solution to original problem
+function getFirstElement<T>(arr: T[]) {
+    return arr[0];
+}
+
+const el = getFirstElement<string>(["Ronit", "Khajuria"]);
+console.log(el.toLowerCase())
