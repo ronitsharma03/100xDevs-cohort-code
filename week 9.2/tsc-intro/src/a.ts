@@ -172,3 +172,34 @@ console.log(Direction.Up);
 console.log(Direction.Down);
 console.log(Direction.Left);
 console.log(Direction.Right);
+
+// Generics in TS
+
+function identity<T>(arg: T){
+    return arg;
+}
+
+const res = identity<string>("Ronit");
+const res2 = identity<number>(21);
+console.log(res.toUpperCase());
+console.log(res2);
+
+// Another example
+// 1. Problem Statement
+// Let’s say you have a function that needs to return the first element of an array. Array can be of type either string or integer.
+// How would you solve this problem?
+type newType = string | number;
+function solution (arg: newType){
+    return arg;
+}
+const var1 = solution("Ronit");
+solution(21);
+// console.log(var1.toUpperCase()) This function can't be used as the type of arg is newType type as it don't implicitly specify if it is
+// string or number and TS is not a smart enough to infer the return type
+// So generics can be used to solve this problem
+function identity2<T>(arg: T): T {
+    return arg;
+}
+
+let output1 = identity2<string>("myString");
+let output2 = identity2<number>(100);
