@@ -38,7 +38,7 @@ async function getTodosForUser(userId: number) {
 
 getUsers();
 
-getUserFromEmail("john.do11e@gmail2.com")
+getUserFromEmail("ronit@gmail.com")
 
 const userIdToFetch = 1;
 getTodosForUser(userIdToFetch);
