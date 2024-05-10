@@ -18,4 +18,4 @@ async function getUserAndTodosWithJoin(userId: number) {
     console.log("User and Todos:", results);
 }
 
-getUserAndTodosWithJoin(1)
+getUserAndTodosWithJoin(5)
