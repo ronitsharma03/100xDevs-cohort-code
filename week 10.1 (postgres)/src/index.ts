@@ -25,18 +25,18 @@ const client = new Client({
 });
 
 
-async function connectToDb(){
-    try{
+async function connectToDb() {
+    try {
         await client.connect();
         console.log("Connection to DB successful!");
     }
-    catch(e){
+    catch (e) {
         console.log("Error connecting to DB : " + e);
     }
 }
 
 
-async function createTable(){
+async function createTable() {
     const tableQuery = `
         CREATE TABLE users(
             id SERIAL PRIMARY KEY,
@@ -55,20 +55,51 @@ async function createTable(){
     console.log(tableRes);
 }
 
-async function insertData(){
-    const insertQuery = `
+async function insertData() {
+    try {
+        const insertQuery = `
         INSERT INTO users (username, email, password)
         VALUES ($1, $2, $3)
     `;
-    const userData = ['bebore', 'bebore@gmail.com', 'bebore@123'];
+        const userData = ['ronit', 'ronit@gmail.com', 'ronit@123'];
+        const dataRes = await client.query(insertQuery, userData);
 
-    const dataRes = await client.query(insertQuery, userData);
+        console.log(dataRes);
+        console.log("Data inserted successfully!");
+    }catch(e){
+        console.log("Error inserting data!");
+    }finally{
+        await client.end();
+    }
+}
 
-    console.log(dataRes);
-    console.log("Data inserted successfully!");
-
+async function getUserWithEmail(emailId: string){
+    try{
+        const userQuery = `
+            SELECT * FROM users where email = $1
+        `;
+        const queryRes = await client.query(userQuery, [emailId]);
+        console.log(queryRes);
+        if(queryRes.rows.length > 0){
+            console.log(`User found: \nUsername: ${queryRes.rows[0].username} Email: ${queryRes.rows[0].email}`);
+            return queryRes.rows[0].username;
+        }
+        else{
+            console.log("User not found");
+            return null;
+        }
+    }
+    catch(e){
+        console.log(`Error searching data: ${e}`);
+        throw e;
+    }
+    finally{
+        console.log("Disconnecting from DB....");
+        await client.end();
+    }
 }
 
 connectToDb();
 // createTable();
-insertData();
+// insertData();
+getUserWithEmail("ronit@gmail.com").catch(console.error);
