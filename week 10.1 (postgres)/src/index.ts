@@ -24,13 +24,17 @@ const client = new Client({
     connectionString: "postgresql://ronitkhajuria03:TgA1zXUu0Myl@ep-old-tree-a5v313e2.us-east-2.aws.neon.tech/Postgress-test?sslmode=require"
 });
 
-try{
-    client.connect();
-    console.log("Connection to DB successful!");
+
+async function connectToDb(){
+    try{
+        await client.connect();
+        console.log("Connection to DB successful!");
+    }
+    catch(e){
+        console.log("Error connecting to DB : " + e);
+    }
 }
-catch(e){
-    console.log("Error connecting to DB : " + e);
-}
+
 
 async function createTable(){
     const tableQuery = `
@@ -51,4 +55,20 @@ async function createTable(){
     console.log(tableRes);
 }
 
-createTable();
+async function insertData(){
+    const insertQuery = `
+        INSERT INTO users (username, email, password)
+        VALUES ($1, $2, $3)
+    `;
+    const userData = ['bebore', 'bebore@gmail.com', 'bebore@123'];
+
+    const dataRes = await client.query(insertQuery, userData);
+
+    console.log(dataRes);
+    console.log("Data inserted successfully!");
+
+}
+
+connectToDb();
+// createTable();
+insertData();
