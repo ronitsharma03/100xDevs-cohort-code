@@ -70,11 +70,16 @@ async function createTable() {
 
 async function insertData() {
     try {
-        const insertQuery = `
-        INSERT INTO users (username, email, password)
-        VALUES ($1, $2, $3)
+    //     const insertQuery = `
+    //     INSERT INTO users (username, email, password)
+    //     VALUES ($1, $2, $3)
+    // `;
+
+    const insertQuery = `
+        INSERT INTO addresses (user_id, city, country, street, pincode)
+        VALUES ($1, $2, $3, $4, $5)
     `;
-        const userData = ['ronit', 'ronit@gmail.com', 'ronit@123'];
+        const userData = [1, 'Pune', 'India', '30/8 ambegaon bk', '411043'];
         const dataRes = await client.query(insertQuery, userData);
 
         console.log(dataRes);
@@ -116,5 +121,5 @@ async function getUserWithEmail(emailId: string) {
 
 connectToDb();
 // createTable();
-insertData();
+// insertData();
 // getUserWithEmail("ronit@gmail.com").catch(console.error);
