@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 async function main(){
     await prisma.user.update({
         where: {
-            email: "ronit@gmail.com"
+            email: "ronit03gmail.com"
         },
         data: {
-            email: "ronit03gmail.com"
+            email: "ronit03@gmail.com"
         }
     });
     console.log("Updated Successfully!")

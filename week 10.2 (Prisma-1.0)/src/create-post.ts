@@ -10,7 +10,7 @@ async function main(){
             published: true,
             author: {
                 connect: {
-                    id: 1
+                    id: 6
                 }
             }
         }
