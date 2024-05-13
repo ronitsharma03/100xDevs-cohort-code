@@ -11,7 +11,7 @@ async function main(){
             id: 1
         },
         include: {
-            posts: false
+            posts: true
         }
     });
     console.log(user);
