@@ -11,8 +11,27 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+// export default {
+// 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+// 		return new Response('Hello World!');
+// 	},
+// };
+
+
+export default{
+	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response>{
+		console.log(request.body);
+		console.log(request.headers);
+		console.log(request.method);
+
+		if(request.method === "GET"){
+			return Response.json({
+				message: "A GET request received"
+			});
+		} else{
+			return Response.json({
+				message: "No GET request received"
+			});
+		}
 	},
 };
