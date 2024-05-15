@@ -26,7 +26,7 @@ export default{
 
 		if(request.method === "GET"){
 			return Response.json({
-				message: "A GET request received"
+				message: "A GET request received, hello world!"
 			});
 		} else{
 			return Response.json({
