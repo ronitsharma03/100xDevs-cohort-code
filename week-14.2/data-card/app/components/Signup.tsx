@@ -1,10 +1,20 @@
 "use client";
+import axios from "axios";
 import { ChangeEventHandler, useState } from "react";
-import Button from "./Button";
+import { useRouter } from "next/navigation";
 
-export default function Signup() {
+export function Signup() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+  const router = useRouter();
+
+  async function handleClick(){
+    await axios.post("http://localhost:3000/api/user",{
+        username,
+        password
+    });
+    router.push("/");
+  }
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-gray-100">
@@ -23,7 +33,9 @@ export default function Signup() {
             setpassword(e.target.value);
           }}
         />
-        <Button text={"Signup"} />
+        <div className="max-w-72 flex justify-center mt-5">
+            <button onClick={handleClick} className="bg-blue-500 px-12 py-2 text-white rounded-lg mt-4 hover:bg-blue-400" type="submit">Signup</button>
+        </div>
       </div>
     </div>
   );

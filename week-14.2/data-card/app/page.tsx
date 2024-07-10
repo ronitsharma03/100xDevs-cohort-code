@@ -22,7 +22,7 @@ export default async function Home() {
       <div className="h-screen w-full bg-slate-200 flex justify-center items-center">
             <div className="p-10 h-56 bg-white shadow-xl rounded-lg grid grid-rows-2">
                 <div className="row-span-1 text-lg">
-                   Name: {userData?.name}
+                   ID: {userData?.id}
                 </div>
                 <div className="row-span-1 text-lg">
                     E-mail: {userData?.email}
