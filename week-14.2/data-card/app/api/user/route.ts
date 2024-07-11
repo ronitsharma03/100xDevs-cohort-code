@@ -22,25 +22,35 @@ export async function GET(req: NextRequest){
 
 export async function POST(req: NextRequest){
     // Take the body from the req
-    const body = await req.json();
+    try{
 
-    // Store it in the database
-    console.log(body);
-    const response = await prismaClient.user.create({
-        data: {
-            username: body.username,
-            password: body.password
+        const body = await req.json();
+        
+        // Store it in the database
+        console.log(body);
+        const response = await prismaClient.user.create({
+            data: {
+                username: body.username,
+                password: body.password
+            }
+        });
+        
+        if(!response){
+            return NextResponse.json({
+                message: "Error while signing up"
+            })
         }
-    });
-
-    if(!response){
+        
+        // return the response
         return NextResponse.json({
-            message: "Error while signing up"
+            message: "You are Signed up!"
+        });
+    }catch(error){
+        return NextResponse.json({
+            message : "Error while signing up!"
+        },{
+            status: 411 
         })
     }
 
-    // return the response
-    return Response.json({
-        message: "You are Signed up!"
-    });
 }
