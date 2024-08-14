@@ -1,11 +1,23 @@
-import { NextRequest, NextResponse } from "next/server";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials"
 
 
-// Extracting the routes from the params
-export function GET(req: NextRequest, {params: {authRoutes}}: {params: {authRoutes: String[]}}) {
-    console.log(authRoutes);
-    return NextResponse.json({
-        message: "Catch all routes"
-    });
-}
+const handler = NextAuth({
+    providers: [
+        CredentialsProvider({
+            name: "Email",
+            credentials: {
+                username: {label: "Username", type: "text", placeholder: "username@example.com"},
+                password: {label: "Password", type: "password", placeholder: "123456"}
+            },
+            async authorize(credentials: any) {
+                return {
+                    id: "user1"
+                }
+            },
+        })
+    ]
+});
 
+export const GET = handler;
+export const POST = handler;
