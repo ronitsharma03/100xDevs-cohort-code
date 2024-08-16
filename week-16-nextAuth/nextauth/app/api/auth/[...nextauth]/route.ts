@@ -11,12 +11,15 @@ const handler = NextAuth({
                 password: {label: "Password", type: "password", placeholder: "123456"}
             },
             async authorize(credentials: any) {
+                // console.log(credentials);
+
                 return {
                     id: "user1"
                 }
             },
         })
-    ]
+    ],
+    secret: process.env.NEXTAUTH_SECRET
 });
 
 export const GET = handler;

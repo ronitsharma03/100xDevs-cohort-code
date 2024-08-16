@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {/* Wrap it with the top level sessionprovider component */}
+        <Providers>
+          {/**Here comes the Other providers like the theme providers */}
+          {/*Then comes the Recoilroot in order after all these */}
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
