@@ -40,7 +40,6 @@ const handlers: AddressBookServiceHandlers = {
 };
 const server = new grpc.Server();
 
-// @ts-ignore
 server.addService(personProto.AddressBookService.service, handlers);
 
 server.bindAsync(
